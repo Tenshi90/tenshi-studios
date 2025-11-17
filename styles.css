@@ -465,6 +465,33 @@ body {
 main {
   max-width: 1120px;
   margin: 0 auto;
+}.field-label {
+  display: block;
+  font-size: 12px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.field-input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  font-size: 13px;
+  background: #ffffff;
+}
+
+.auth-message {
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.auth-error {
+  color: #c0392b;
+}
+
+.auth-success {
+  color: #0da98a;
 }
 
 .store-hero {
