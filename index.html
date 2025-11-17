@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tenshi Studios Marketplace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo-text">Tenshi Studios</div>
+      <div class="badge">Creator marketplace</div>
+    </div>
+  </header>
+
+  <main>
+    <h1 class="page-title">Featured creator shops</h1>
+    <p class="page-subtitle">
+      Browse independent brands hosted on Tenshi Studios. Tap a shop to view their products.
+    </p>
+
+    <section id="stores-grid" class="grid">
+      <p class="empty">Loading stores…</p>
+    </section>
+  </main>
+
+  <script>
+    async function loadStores() {
+      const container = document.getElementById("stores-grid");
+
+      try {
+        const res = await fetch("data/stores.json");
+        const stores = await res.json();
+
+        if (!Array.isArray(stores) || stores.length === 0) {
+          container.innerHTML = '<p class="empty">No shops yet. Check back soon.</p>';
+          return;
+        }
+
+        container.innerHTML = "";
+
+        stores
+          .filter(s => s.featured !== false) // treat featured=true or missing as visible
+          .forEach(store => {
+            const card = document.createElement("a");
+            card.className = "store-card";
+            card.href = "store.html?store=" + encodeURIComponent(store.id);
+
+            const bannerStyle = store.banner_image_url
+              ? "background-image:url('" + store.banner_image_url + "');"
+              : "";
+
+            card.innerHTML = `
+              <div class="store-banner" style="${bannerStyle}">
+                ${store.banner_image_url ? "" : '<div class="placeholder-banner">Hosted on Tenshi Studios</div>'}
+              </div>
+              <div class="store-content">
+                <div class="store-header-row">
+                  ${store.logo_image_url ? `<img src="${store.logo_image_url}" class="store-logo" alt="${store.name} logo">` : ""}
+                  <div>
+                    <h2>${store.name || "Untitled shop"}</h2>
+                    ${store.owner_name ? `<p class="owner">by ${store.owner_name}</p>` : ""}
+                  </div>
+                </div>
+                ${store.bio ? `<p class="bio">${store.bio}</p>` : ""}
+              </div>
+            `;
+
+            container.appendChild(card);
+          });
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = '<p class="error">Could not load shops right now.</p>';
+      }
+    }
+
+    loadStores();
+  </script>
+</body>
+</html>
