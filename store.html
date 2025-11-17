@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Store • Tenshi Studios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a class="logo-text" href="index.html">Tenshi Studios</a>
+      <div class="badge">Creator shop</div>
+    </div>
+  </header>
+
+  <main>
+    <a href="index.html" class="back-link">← All shops</a>
+
+    <section id="store-hero"></section>
+
+    <h2 class="page-title" style="margin-top: 4px;">Products</h2>
+    <section id="products" class="products-grid">
+      <p class="empty">Loading products…</p>
+    </section>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const storeId = params.get("store");
+
+    const heroContainer = document.getElementById("store-hero");
+    const productsContainer = document.getElementById("products");
+
+    if (!storeId) {
+      heroContainer.innerHTML = "<p class='error'>No store selected.</p>";
+      productsContainer.innerHTML = "";
+    } else {
+      loadStoreAndProducts(storeId);
+    }
+
+    async function loadStoreAndProducts(id) {
+      try {
+        const [storesRes, productsRes] = await Promise.all([
+          fetch("data/stores.json"),
+          fetch("data/products.json")
+        ]);
+
+        const stores = await storesRes.json();
+        const products = await productsRes.json();
+
+        const store = Array.isArray(stores)
+          ? stores.find(s => s.id === id)
+          : null;
+
+        if (!store) {
+          heroContainer.innerHTML = "<p class='error'>Store not found.</p>";
+          productsContainer.innerHTML = "";
+          return;
+        }
+
+        renderStoreHero(store);
+        renderProducts(id, products);
+        document.title = (store.name || "Store") + " • Tenshi Studios";
+      } catch (err) {
+        console.error(err);
+        heroContainer.innerHTML = "<p class='error'>Error loading store.</p>";
+        productsContainer.innerHTML = "";
+      }
+    }
+
+    function renderStoreHero(store) {
+      const bannerStyle = store.banner_image_url
+        ? "background-image:url('" + store.banner_image_url + "');"
+        : "";
+
+      const logoImg = store.logo_image_url
+        ? `<img src="${store.logo_image_url}" alt="${store.name} logo" class="store-hero-logo">`
+        : "";
+
+      const links = [];
+
+      if (store.main_shop_url) {
+        links.push(`<a class="chip" href="${store.main_shop_url}" target="_blank" rel="noopener noreferrer">Main shop</a>`);
+      }
+      if (store.instagram) {
+        links.push(`<a class="chip" href="${store.instagram}" target="_blank" rel="noopener noreferrer">Instagram</a>`);
+      }
+      if (store.tiktok) {
+        links.push(`<a class="chip" href="${store.tiktok}" target="_blank" rel="noopener noreferrer">TikTok</a>`);
+      }
+      if (store.contact_email) {
+        links.push(`<a class="chip" href="mailto:${store.contact_email}">Email</a>`);
+      }
+
+      heroContainer.innerHTML = `
+        <section class="store-hero">
+          <div class="store-hero-banner" style="${bannerStyle}">
+            ${!store.banner_image_url ? '<div class="placeholder-banner">Creator hosted on Tenshi Studios</div>' : ""}
+          </div>
+          <div class="store-hero-meta">
+            <div class="store-hero-title-row">
+              ${logoImg}
+              <div>
+                <div class="store-hero-name">${store.name || "Untitled shop"}</div>
+                ${store.owner_name ? `<div class="store-hero-owner">by ${store.owner_name}</div>` : ""}
+              </div>
+            </div>
+            ${store.bio ? `<p class="store-hero-bio">${store.bio}</p>` : ""}
+            ${links.length ? `<div class="store-links">${links.join("")}</div>` : ""}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderProducts(storeId, products) {
+      if (!Array.isArray(products)) {
+        productsContainer.innerHTML = "<p class='empty'>No products yet.</p>";
+        return;
+      }
+
+      const filtered = products.filter(p => p.store_id === storeId);
+
+      if (!filtered.length) {
+        productsContainer.innerHTML = "<p class='empty'>This creator hasn’t added products yet.</p>";
+        return;
+      }
+
+      productsContainer.innerHTML = "";
+
+      filtered.forEach(p => {
+        const img = p.image_url
+          ? `<img class="product-image" src="${p.image_url}" alt="${p.name}">`
+          : `<div class="product-image"></div>`;
+
+        const priceText = (p.price != null && p.currency)
+          ? new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: p.currency
+            }).format(p.price)
+          : (p.price != null ? p.price : "");
+
+        const button = p.buy_url
+          ? `<a class="buy-button" href="${p.buy_url}" target="_blank" rel="noopener noreferrer">Buy now</a>`
+          : "";
+
+        const description = p.description
+          ? `<p class="product-description">${p.description}</p>`
+          : "";
+
+        const card = document.createElement("article");
+        card.className = "product-card";
+        card.innerHTML = `
+          ${img}
+          <div class="product-body">
+            <div class="product-name">${p.name || "Untitled product"}</div>
+            ${description}
+            <div class="product-price-row">
+              <div class="product-price">${priceText}</div>
+            </div>
+            ${button}
+          </div>
+        `;
+
+        productsContainer.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
