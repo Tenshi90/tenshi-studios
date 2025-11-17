@@ -2,80 +2,221 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Tenshi Studios Marketplace</title>
+  <title>Tenshi Studios – Build Your Own Web Platform</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tenshi Studios hosts simple, beautiful storefronts for independent creators. No coding, just your brand, your links, your payments.">
   <link rel="stylesheet" href="styles.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <div class="header-inner">
-      <div class="logo-text">Tenshi Studios</div>
-      <div class="badge">Creator marketplace</div>
+  <!-- TOP NAV -->
+  <header class="top-nav">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="nav-logo">Tenshi<br>Studios</div>
+      </div>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#examples">Examples</a>
+        <a href="#offer">What we offer</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="store.html?store=pixieblush">View a live store</a>
     </div>
   </header>
 
   <main>
-    <h1 class="page-title">Featured creator shops</h1>
-    <p class="page-subtitle">
-      Browse independent brands hosted on Tenshi Studios. Tap a shop to view their products.
-    </p>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
 
-    <section id="stores-grid" class="grid">
-      <p class="empty">Loading stores…</p>
+      <div class="hero-inner">
+        <div class="hero-text">
+          <p class="hero-kicker">Heed the call of your dreams</p>
+          <h1>Create your own web platform.</h1>
+          <p class="hero-copy">
+            Tenshi Studios is your place to turn ideas into simple, beautiful storefronts.
+            We host the page, you control the story, links, and payments.
+          </p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="https://forms.gle/">Start edit →</a>
+            <a class="btn-ghost" href="#examples">See examples</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE CARDS -->
+    <section id="features" class="section section-teal">
+      <div class="section-inner section-split">
+        <div class="section-copy">
+          <h2>Create your own web platform</h2>
+          <p>
+            Welcome to Tenshi Studios—your hub for low-maintenance websites.
+            We set up the structure, you update images, text, and links whenever inspiration hits.
+          </p>
+        </div>
+
+        <div class="card-row">
+          <article class="info-card">
+            <div class="info-image" style="background-image:url('https://images.pexels.com/photos/754583/pexels-photo-754583.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+            <h3>Customized Stores</h3>
+            <p>Every creator gets a focused page that highlights their products, brand story, and links.</p>
+          </article>
+
+          <article class="info-card">
+            <div class="info-image" style="background-image:url('https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+            <h3>Simple, low-touch setup</h3>
+            <p>We host everything on Tenshi Studios so you don’t worry about themes, plugins, or updates.</p>
+          </article>
+
+          <article class="info-card">
+            <div class="info-image" style="background-image:url('https://images.pexels.com/photos/4968391/pexels-photo-4968391.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+            <h3>Flexible payments</h3>
+            <p>Connect Stripe, Etsy, or any external checkout link. Customers pay you directly.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXAMPLE STORES -->
+    <section id="examples" class="section section-light">
+      <div class="section-inner">
+        <h2 class="section-title">Low-maintenance websites</h2>
+        <p class="section-subtitle">
+          A sample of the kinds of pages you can host on Tenshi Studios.
+        </p>
+
+        <div class="card-row example-row">
+          <article class="example-card">
+            <div class="example-image" style="background-image:url('https://images.pexels.com/photos/102129/pexels-photo-102129.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+            <div class="example-body">
+              <h3>Pixie Blush Kreationz store</h3>
+              <p>Handmade, kawaii-inspired beauty and gift items crafted with care.</p>
+              <div class="example-meta">
+                <span class="tag">Live example</span>
+                <a class="text-link" href="store.html?store=pixieblush">View store →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="example-card">
+            <div class="example-image" style="background-image:url('https://images.pexels.com/photos/2441454/pexels-photo-2441454.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+            <div class="example-body">
+              <h3>Semi-guided tour page</h3>
+              <p>Perfect for photographers, tour guides, and travel creators who sell experiences.</p>
+              <div class="example-meta">
+                <span class="tag">$499 template</span>
+                <span class="dot"></span>
+                <span>Booking link ready</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="example-card">
+            <div class="example-image" style="background-image:url('https://images.pexels.com/photos/4587966/pexels-photo-4587966.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+            <div class="example-body">
+              <h3>Custom pet portraits</h3>
+              <p>Showcase art commissions, before-and-after shots, and quick payment buttons.</p>
+              <div class="example-meta">
+                <span class="tag">Art & design</span>
+                <span class="dot"></span>
+                <span>Made to order</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT WE OFFER -->
+    <section id="offer" class="section section-cream">
+      <div class="section-inner">
+        <h2 class="section-title">What we can offer you</h2>
+        <p class="section-subtitle">
+          Tenshi Studios focuses on clean layouts, fast mobile performance, and creator-friendly pricing.
+        </p>
+
+        <div class="card-row offer-row">
+          <article class="small-card">
+            <h3>Bespoke layouts</h3>
+            <p>Choose from curated templates and tweak copy, colors, and imagery to match your brand.</p>
+          </article>
+          <article class="small-card">
+            <h3>Guided setup</h3>
+            <p>We walk you through how to plug in your images, links, and Stripe or Etsy payments.</p>
+          </article>
+          <article class="small-card">
+            <h3>Mobile first</h3>
+            <p>Pages are designed for phone-first visitors—fast, scrollable, and easy to tap.</p>
+          </article>
+          <article class="small-card">
+            <h3>Hosted for you</h3>
+            <p>No hosting dashboards or confusing settings. Tenshi Studios keeps your page online.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS / SOCIAL PROOF -->
+    <section class="section section-dark">
+      <div class="section-inner">
+        <h2 class="section-title">What creators are saying</h2>
+        <div class="testimonial-row">
+          <article class="testimonial">
+            <p class="quote">“I went from zero webpage to a live store link I can send to clients in a weekend.”</p>
+            <p class="author">— Miguel R.</p>
+          </article>
+          <article class="testimonial">
+            <p class="quote">“All I do is update my images and links. Tenshi Studios handles the rest.”</p>
+            <p class="author">— Larissa C.</p>
+          </article>
+          <article class="testimonial">
+            <p class="quote">“Feels like a mini Wix that’s just for me and my brand.”</p>
+            <p class="author">— Carey L.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner">
+      <div class="cta-bg"></div>
+      <div class="cta-overlay"></div>
+      <div class="cta-inner">
+        <h2>Build yours today.</h2>
+        <p>Monthly payment plans and simple one-time setups available.</p>
+        <a class="btn-primary btn-light" href="https://forms.gle/">Request your storefront →</a>
+      </div>
     </section>
   </main>
 
-  <script>
-    async function loadStores() {
-      const container = document.getElementById("stores-grid");
-
-      try {
-        const res = await fetch("data/stores.json");
-        const stores = await res.json();
-
-        if (!Array.isArray(stores) || stores.length === 0) {
-          container.innerHTML = '<p class="empty">No shops yet. Check back soon.</p>';
-          return;
-        }
-
-        container.innerHTML = "";
-
-        stores
-          .filter(s => s.featured !== false) // treat featured=true or missing as visible
-          .forEach(store => {
-            const card = document.createElement("a");
-            card.className = "store-card";
-            card.href = "store.html?store=" + encodeURIComponent(store.id);
-
-            const bannerStyle = store.banner_image_url
-              ? "background-image:url('" + store.banner_image_url + "');"
-              : "";
-
-            card.innerHTML = `
-              <div class="store-banner" style="${bannerStyle}">
-                ${store.banner_image_url ? "" : '<div class="placeholder-banner">Hosted on Tenshi Studios</div>'}
-              </div>
-              <div class="store-content">
-                <div class="store-header-row">
-                  ${store.logo_image_url ? `<img src="${store.logo_image_url}" class="store-logo" alt="${store.name} logo">` : ""}
-                  <div>
-                    <h2>${store.name || "Untitled shop"}</h2>
-                    ${store.owner_name ? `<p class="owner">by ${store.owner_name}</p>` : ""}
-                  </div>
-                </div>
-                ${store.bio ? `<p class="bio">${store.bio}</p>` : ""}
-              </div>
-            `;
-
-            container.appendChild(card);
-          });
-      } catch (err) {
-        console.error(err);
-        container.innerHTML = '<p class="error">Could not load shops right now.</p>';
-      }
-    }
-
-    loadStores();
-  </script>
+  <!-- FOOTER -->
+  <footer id="contact" class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand">Tenshi Studios</p>
+        <p class="footer-copy">Hosting simple, focused storefronts for independent creators.</p>
+      </div>
+      <div class="footer-grid">
+        <div>
+          <p class="footer-label">Phone</p>
+          <p>(123) 456-7890</p>
+        </div>
+        <div>
+          <p class="footer-label">Email</p>
+          <p>tenshistudioshelp@gmail.com</p>
+        </div>
+        <div>
+          <p class="footer-label">Social</p>
+          <p>@Tenshii90</p>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
