@@ -2,81 +2,324 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Creator Login • Tenshi Studios</title>
+  <title>Creator Portal • Tenshi Studios</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="header-inner">
-      <a class="brand-lockup" href="index.html">
-        <div class="logo-mark">TS</div>
-        <div>
-          <div class="logo-text">Tenshi Studios</div>
-          <div class="logo-sub">Creator dashboard</div>
-        </div>
-      </a>
-      <div class="badge">Private</div>
+  <!-- Top nav reused -->
+  <header class="top-nav">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="nav-logo">Tenshi<br>Studios</div>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="store.html?store=pixieblush" target="_blank">Example store</a>
+      </nav>
+      <span class="nav-cta">Creator Portal</span>
     </div>
   </header>
 
-  <main>
-    <section class="auth-card">
-      <h1 class="page-title">Creator login</h1>
-      <p class="page-subtitle">
-        Sign in to access your creator control panel. If you don’t have access yet, please contact Tenshi Studios.
-      </p>
+  <main style="padding-top:80px;">
+    <!-- SECTION 1: new creators -->
+    <section class="section section-cream">
+      <div class="section-inner">
+        <h2 class="section-title">Start your own storefront</h2>
+        <p class="section-subtitle">
+          Tenshi Studios hosts simple, focused pages for creators. If you don’t
+          have a store with us yet, you can request one in a few steps.
+        </p>
 
-      <label class="field-label" for="store-id">Store ID</label>
-      <input id="store-id" class="field-input" placeholder="e.g. pixieblush">
+        <div class="small-card">
+          <h3>New here?</h3>
+          <p style="font-size:13px; opacity:0.9;">
+            Fill out the short form below with your brand name, what you sell,
+            and your main links. We’ll review it and set up your storefront on
+            Tenshi Studios.
+          </p>
+          <a class="btn-primary" style="margin-top:10px; display:inline-block;"
+             href="https://forms.gle/REPLACE_WITH_YOUR_ONBOARD_FORM"
+             target="_blank" rel="noopener noreferrer">
+            Apply for a storefront →
+          </a>
+          <p style="font-size:11px; opacity:0.75; margin-top:6px;">
+            After approval, you’ll receive a Store ID and password to log in below.
+          </p>
+        </div>
+      </div>
+    </section>
 
-      <label class="field-label" for="password">Password</label>
-      <input id="password" class="field-input" type="password" placeholder="Enter your creator password">
+    <!-- SECTION 2: login for existing creators -->
+    <section class="section section-light" id="login-section">
+      <div class="section-inner">
+        <h2 class="section-title">Creator Login</h2>
+        <p class="section-subtitle">
+          Already have a Tenshi Studios storefront? Log in with your Store ID and password.
+        </p>
 
-      <button class="btn-primary full-width" onclick="handleLogin()">Sign in</button>
+        <div style="max-width:380px;">
+          <label class="field-label" for="store-id">Store ID</label>
+          <input id="store-id" class="field-input" placeholder="e.g. pixieblush">
 
-      <p id="auth-message" class="auth-message"></p>
+          <label class="field-label" for="creator-password">Password</label>
+          <input id="creator-password" class="field-input" type="password" placeholder="Creator password">
+
+          <button class="btn-primary" style="margin-top:10px;" onclick="handleLogin()">
+            Log in
+          </button>
+          <p id="login-message" class="auth-message"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: shared creator panel (for any store) -->
+    <section class="section section-cream" id="panel-section" style="display:none;">
+      <div class="section-inner section-split">
+
+        <!-- PREVIEW -->
+        <div>
+          <h2 class="section-title" id="panel-title" style="font-size:20px;">
+            Storefront preview
+          </h2>
+          <p class="section-subtitle" id="panel-subtitle">
+            This shows how your Tenshi Studios page will look after updates.
+          </p>
+
+          <article class="example-card">
+            <div id="preview-banner" class="example-image"
+                 style="background-image:url('https://images.pexels.com/photos/102129/pexels-photo-102129.jpeg?auto=compress&cs=tinysrgb&w=800');">
+            </div>
+
+            <div class="example-body">
+              <h3 id="preview-name">Your store name</h3>
+              <p id="preview-bio">Your short bio will appear here.</p>
+              <div class="example-meta">
+                <span class="tag">Live storefront</span>
+                <span class="dot"></span>
+                <span id="preview-store-id">Store ID: —</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- EDITOR -->
+        <div>
+          <h2 class="section-title" style="font-size:20px;">Edit your storefront</h2>
+
+          <!-- Store details -->
+          <div class="small-card" style="margin-bottom:16px;">
+            <h3>Store details</h3>
+            <p style="font-size:12px; opacity:0.8;">
+              Update your name, bio, banner image, and main links.
+            </p>
+
+            <label class="field-label" for="store-name">Store name</label>
+            <input id="store-name" class="field-input" placeholder="Brand or shop name">
+
+            <label class="field-label" for="store-bio">Short bio</label>
+            <textarea id="store-bio" class="field-input" rows="3"
+                      placeholder="One or two sentences about your brand."></textarea>
+
+            <label class="field-label" for="store-banner">Banner image URL</label>
+            <input id="store-banner" class="field-input" placeholder="Wide image link">
+
+            <label class="field-label" for="store-logo">Logo image URL</label>
+            <input id="store-logo" class="field-input" placeholder="Square logo link">
+
+            <label class="field-label" for="store-instagram">Instagram URL</label>
+            <input id="store-instagram" class="field-input">
+
+            <label class="field-label" for="store-tiktok">TikTok URL</label>
+            <input id="store-tiktok" class="field-input">
+
+            <label class="field-label" for="store-mainshop">Main shop URL (Etsy, site, etc.)</label>
+            <input id="store-mainshop" class="field-input">
+
+            <button class="btn-primary" style="margin-top:10px;" onclick="updatePreview()">
+              Update preview
+            </button>
+          </div>
+
+          <!-- Product section -->
+          <div class="small-card">
+            <h3>Products</h3>
+            <p style="font-size:12px; opacity:0.8;">
+              Add, update, or delete one product at a time.
+            </p>
+
+            <label class="field-label" for="product-action">Action</label>
+            <select id="product-action" class="field-input">
+              <option value="add">Add product</option>
+              <option value="update">Update product</option>
+              <option value="delete">Delete product</option>
+            </select>
+
+            <label class="field-label" for="product-id">Product ID (required)</label>
+            <input id="product-id" class="field-input" placeholder="e.g. mystore-item-01">
+
+            <label class="field-label" for="product-name">Product name</label>
+            <input id="product-name" class="field-input">
+
+            <label class="field-label" for="product-desc">Description</label>
+            <textarea id="product-desc" class="field-input" rows="3"></textarea>
+
+            <div style="display:flex; gap:8px;">
+              <div style="flex:1;">
+                <label class="field-label" for="product-price">Price</label>
+                <input id="product-price" class="field-input" placeholder="24.99">
+              </div>
+              <div style="width:90px;">
+                <label class="field-label" for="product-currency">Currency</label>
+                <input id="product-currency" class="field-input" value="USD">
+              </div>
+            </div>
+
+            <label class="field-label" for="product-image">Product image URL</label>
+            <input id="product-image" class="field-input">
+
+            <label class="field-label" for="product-buyurl">Buy link (Stripe, Etsy, etc.)</label>
+            <input id="product-buyurl" class="field-input">
+
+            <label class="field-label" for="product-featured">Featured?</label>
+            <select id="product-featured" class="field-input">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+
+            <button class="btn-primary" style="margin-top:10px;" onclick="prepareEmail()">
+              Send these changes to Tenshi
+            </button>
+
+            <p style="font-size:11px; opacity:0.7; margin-top:6px;">
+              This opens your email app with all details. Tenshi will review and publish
+              the changes to your live store.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
-  <script>
-    // ⚠️ Simple front-end-only auth.
-    // For now we hard-code allowed creators + passwords.
-    // Later we can move this to a more secure system.
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-brand">Tenshi Studios</p>
+      <p class="footer-copy">Creator tools for hosted storefronts.</p>
+    </div>
+  </footer>
 
+  <script>
+    // Add each creator you approve here:
+    // id = store_id used in JSON / URLs
+    // password = creator's login password
+    // email = where their updates should be sent (you can use your own)
     const creators = [
       {
         id: "pixieblush",
-        password: "pixie-secret",
-        panelUrl: "https://docs.google.com/forms/your_pixie_form_url_here"
+        password: "pixie2025",
+        email: "tenshistudioshelp@gmail.com"
       }
-      // You can add more creators here later.
-      // {
-      //   id: "anotherstore",
-      //   password: "another-secret",
-      //   panelUrl: "https://docs.google.com/forms/..."
-      // }
+      // Add more:
+      // { id: "anotherstore", password: "secret123", email: "youremail@example.com" }
     ];
+
+    let currentCreator = null;
 
     function handleLogin() {
       const storeId = document.getElementById("store-id").value.trim().toLowerCase();
-      const password = document.getElementById("password").value.trim();
-      const message = document.getElementById("auth-message");
+      const password = document.getElementById("creator-password").value.trim();
+      const msg = document.getElementById("login-message");
 
       const match = creators.find(c => c.id === storeId && c.password === password);
 
       if (!match) {
-        message.textContent = "Invalid store ID or password.";
-        message.className = "auth-message auth-error";
+        msg.textContent = "Store ID or password is incorrect.";
+        msg.className = "auth-message auth-error";
         return;
       }
 
-      message.textContent = "Success! Redirecting to your creator panel…";
-      message.className = "auth-message auth-success";
+      currentCreator = match;
+      msg.textContent = "";
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("panel-section").style.display = "block";
 
-      setTimeout(() => {
-        window.location.href = match.panelUrl;
-      }, 700);
+      document.getElementById("panel-title").textContent =
+        "Storefront preview – " + match.id;
+      document.getElementById("preview-store-id").textContent =
+        "Store ID: " + match.id;
+    }
+
+    function updatePreview() {
+      const name = document.getElementById("store-name").value.trim();
+      const bio = document.getElementById("store-bio").value.trim();
+      const banner = document.getElementById("store-banner").value.trim();
+
+      if (name) document.getElementById("preview-name").textContent = name;
+      if (bio) document.getElementById("preview-bio").textContent = bio;
+      if (banner) {
+        document.getElementById("preview-banner").style.backgroundImage =
+          "url('" + banner + "')";
+      }
+    }
+
+    function prepareEmail() {
+      if (!currentCreator) return;
+
+      const storeId = currentCreator.id;
+
+      const store = {
+        name: document.getElementById("store-name").value.trim(),
+        bio: document.getElementById("store-bio").value.trim(),
+        banner_image_url: document.getElementById("store-banner").value.trim(),
+        logo_image_url: document.getElementById("store-logo").value.trim(),
+        instagram: document.getElementById("store-instagram").value.trim(),
+        tiktok: document.getElementById("store-tiktok").value.trim(),
+        main_shop_url: document.getElementById("store-mainshop").value.trim()
+      };
+
+      const product = {
+        action: document.getElementById("product-action").value,
+        id: document.getElementById("product-id").value.trim(),
+        name: document.getElementById("product-name").value.trim(),
+        description: document.getElementById("product-desc").value.trim(),
+        price: document.getElementById("product-price").value.trim(),
+        currency: document.getElementById("product-currency").value.trim(),
+        image_url: document.getElementById("product-image").value.trim(),
+        buy_url: document.getElementById("product-buyurl").value.trim(),
+        featured: document.getElementById("product-featured").value
+      };
+
+      const lines = [
+        `Store ID: ${storeId}`,
+        "",
+        "=== STORE DETAILS (optional) ===",
+        `Name: ${store.name}`,
+        `Bio: ${store.bio}`,
+        `Banner image URL: ${store.banner_image_url}`,
+        `Logo image URL: ${store.logo_image_url}`,
+        `Instagram: ${store.instagram}`,
+        `TikTok: ${store.tiktok}`,
+        `Main shop URL: ${store.main_shop_url}`,
+        "",
+        "=== PRODUCT CHANGE (one at a time) ===",
+        `Action: ${product.action}`,
+        `Product ID: ${product.id}`,
+        `Name: ${product.name}`,
+        `Description: ${product.description}`,
+        `Price: ${product.price}`,
+        `Currency: ${product.currency}`,
+        `Image URL: ${product.image_url}`,
+        `Buy link: ${product.buy_url}`,
+        `Featured: ${product.featured}`,
+        "",
+        "(Use Store ID + Product info to update stores.json and products.json)"
+      ];
+
+      const subject = encodeURIComponent(`Update for ${storeId} on Tenshi Studios`);
+      const body = encodeURIComponent(lines.join("\n"));
+      const to = currentCreator.email || "tenshistudioshelp@gmail.com";
+
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
     }
   </script>
 </body>
