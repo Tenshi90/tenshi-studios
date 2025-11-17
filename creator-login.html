@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Creator Login • Tenshi Studios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a class="brand-lockup" href="index.html">
+        <div class="logo-mark">TS</div>
+        <div>
+          <div class="logo-text">Tenshi Studios</div>
+          <div class="logo-sub">Creator dashboard</div>
+        </div>
+      </a>
+      <div class="badge">Private</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="auth-card">
+      <h1 class="page-title">Creator login</h1>
+      <p class="page-subtitle">
+        Sign in to access your creator control panel. If you don’t have access yet, please contact Tenshi Studios.
+      </p>
+
+      <label class="field-label" for="store-id">Store ID</label>
+      <input id="store-id" class="field-input" placeholder="e.g. pixieblush">
+
+      <label class="field-label" for="password">Password</label>
+      <input id="password" class="field-input" type="password" placeholder="Enter your creator password">
+
+      <button class="btn-primary full-width" onclick="handleLogin()">Sign in</button>
+
+      <p id="auth-message" class="auth-message"></p>
+    </section>
+  </main>
+
+  <script>
+    // ⚠️ Simple front-end-only auth.
+    // For now we hard-code allowed creators + passwords.
+    // Later we can move this to a more secure system.
+
+    const creators = [
+      {
+        id: "pixieblush",
+        password: "pixie-secret",
+        panelUrl: "https://docs.google.com/forms/your_pixie_form_url_here"
+      }
+      // You can add more creators here later.
+      // {
+      //   id: "anotherstore",
+      //   password: "another-secret",
+      //   panelUrl: "https://docs.google.com/forms/..."
+      // }
+    ];
+
+    function handleLogin() {
+      const storeId = document.getElementById("store-id").value.trim().toLowerCase();
+      const password = document.getElementById("password").value.trim();
+      const message = document.getElementById("auth-message");
+
+      const match = creators.find(c => c.id === storeId && c.password === password);
+
+      if (!match) {
+        message.textContent = "Invalid store ID or password.";
+        message.className = "auth-message auth-error";
+        return;
+      }
+
+      message.textContent = "Success! Redirecting to your creator panel…";
+      message.className = "auth-message auth-success";
+
+      setTimeout(() => {
+        window.location.href = match.panelUrl;
+      }, 700);
+    }
+  </script>
+</body>
+</html>
